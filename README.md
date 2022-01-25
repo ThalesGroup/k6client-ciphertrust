@@ -21,7 +21,8 @@ This setup can be performed by either of the below methods.
 
    Other Linux distributions also might work. We have tested with Ubuntu 20.04.3 LTS.
 
-2. Install k6 client from here. Refer to Ubuntu installation steps available at https://k6.io/docs/getting-started/installation/
+2. Install k6 client by referring to Ubuntu installation steps available at:    
+   https://k6.io/docs/getting-started/installation/
 
    Or just use the Docker image. See `run.sh`
 
@@ -30,11 +31,12 @@ This setup can be performed by either of the below methods.
 
     sudo apt-get update -y; sudo apt-get install -y jq
 
-5. Install Ciphertrust Manager instance, ideally in same region/zone as the Linux system hosting the k6 client.
+4. Install Ciphertrust Manager instance, ideally in same region/zone as the Linux system hosting the k6 client.
 
-6. Ensure that Ciphertrust Manager instance is reachable from the machine hosting k6 client.
+5. Ensure that Ciphertrust Manager instance is reachable from the machine hosting k6 client.
 
-7. Acquire a `google_service_account_file` for your Google account. It is not located in this repo.
+6. Acquire a `google_service_account_file` for your Google account. It is not located in this repo.  
+   Ensure that this service account has `Service Account Token Creator` permission.
 
 ### Method 1: Pre-configure Ciphertrust Manager and create environment for k6
 #### Pre-requisites
@@ -94,28 +96,37 @@ Refer section `Steps to run k6 client to measure EKM wrap performance`
 
 ### Method 2: Create environment for k6 (assuming Ciphertrust Manager is already setup)
 #### Pre-requisites
-1. Add 'test-ekm' Google project in Ciphertust Manager.
+1. Add 'test-ekm' Google project in Ciphertust Manager from GUI or CLI.  
+   In case you chose to use CLI,
+    1. download the utility and create configuration as mentioned in step 1 and 2 of `Pre-requisites` section of Method 1 above.
+    2. Execute below command to add google project for testing:    
 
 
     ./ksctl-linux-amd64 cckm google projects add --project_id test-ekm
 
-2. Create Symmetric EKM endpoint with following policy attributes:
+2. Replace value in `clients` field with value of `client_email` from `google_service_account_file` in `ekm_policy.js`  
+
+
+3. Create Symmetric EKM endpoint with following policy attributes:
 
 
     ./ksctl-linux-amd64 cckm ekm endpoints create --endpointName test --hostName "$host" --ekm-endpoint-policy-jsonfile ekm_policy.js
 
-3. Invoke following script to generate the environment variables:
+4. Invoke following script to generate the environment variables:
 
 
     ./ekm_performance_config_setup.sh -f "test-cm.thalescpl.io" -e "https://test-cm.thalescpl.io/api/v1/cckm/ekm/endpoints/d73dc773-710e-4c59-b605-411be7c37d68" -a "/home/john/Downloads/test-gcp-service-account.json"
-    source .env
+    source .env  
+
+    "/home/john/Downloads/test-gcp-service-account.json" above refers to service account file downloaded from Google in `Common prerequisites` steps mentioned earlier.  
+
 
 Above command would generate  Google token and EKM endpoint URL as below environment variables:  
 
     G_TOKEN
     ENDPOINT_URL
 
-4. User can now run the k6 with desired parameters by using environment variables generated in previous step.
+5. User can now run the k6 with desired parameters by using environment variables generated in previous step.
 
 
      k6 run --stage 5s:70,30s:70,5s:0 ekm_wrap.js -e G_TOKEN=$G_TOKEN -e ENDPOINT_URL=$ENDPOINT_URL  
