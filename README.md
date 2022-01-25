@@ -7,7 +7,8 @@ Run the script in this repository and then run the k6 script to collect EKM perf
 
 For best performance, it is recommended to have following:  
 - Ciphertrust Manager configuration of >= 4CPU, 16GB memory.  
-- Ciphertrust Manager instance hosted in same region/zone as the client machine where k6 is run.  
+- Ciphertrust Manager instance hosted in same region/zone as the client machine where k6 is run.
+- For getting closest results to your environment, deploy client in same region as your Google KMS.  
 
 ## Usage for environment configuration
 Setup is required for k6 client and Ciphertrust Manager to measure EKM service performance for wrap operation.
@@ -15,7 +16,7 @@ This setup can be performed by either of the below methods.
 - Script to pre-configure Ciphertrust Manager and create environment for k6.
 - Script to create environment for k6 (assuming Ciphertrust Manager is already setup).
 
-### Common prerequisites for both of the above methods
+### Common prerequisites for all of the above methods
 1. Setup Linux system with Ubuntu with bash shell support.
 
    Other Linux distributions also might work. We have tested with Ubuntu 20.04.3 LTS.
