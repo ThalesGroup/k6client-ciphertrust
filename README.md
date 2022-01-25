@@ -17,16 +17,18 @@ This setup can be performed by either of the below methods.
 - Script to create environment for k6 (assuming Ciphertrust Manager is already setup).
 
 ### Common prerequisites for all of the above methods
-1. Setup Linux system with Ubuntu with bash shell support.
+1. This tool is supported only with Ciphertrust Manager version >= 2.7.0.  
+
+2. Setup Linux system with Ubuntu with bash shell support.
 
    Other Linux distributions also might work. We have tested with Ubuntu 20.04.3 LTS.
 
-2. Install k6 client by referring to Ubuntu installation steps available at:    
+3. Install k6 client by referring to Ubuntu installation steps available at:    
    https://k6.io/docs/getting-started/installation/
 
    Or just use the Docker image. See `run.sh`
 
-3. Install 'jq' utility:
+4. Install 'jq' utility:
 
 
     sudo apt-get update -y; sudo apt-get install -y jq
