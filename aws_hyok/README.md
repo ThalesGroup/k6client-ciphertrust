@@ -40,10 +40,10 @@ Above runs the performance with following configuration:
   * Ramp down to 0 virtual users in 5 seconds
 * Send encrypt requests from virtual users during above
 * k6 displays the results after the run is complete. Below is the sample output of k6
+```
 ✓ status code
-
-checks.........................: 100.00% ✓ 3304 ✗ 0
-data_received..................: 4.6 MB 115 kB/s
+checks.........................: 100.00% ✓ 3304 ✗ 0 
+data_received..................: 4.6 MB 115 kB/s 
 data_sent......................: 4.3 MB 106 kB/s
 http_req_blocked...............: avg=88µs min=1.96µs med=5.34µs max=47.38ms p(90)=7.16µs p(95)=8.45µs
 http_req_connecting............: avg=13.46µs min=0s med=0s max=1.1ms p(90)=0s p(95)=0s
@@ -59,7 +59,7 @@ iteration_duration.............: avg=534.28ms min=513ms med=528.22ms max=690.41m
 iterations.....................: 3304 81.791011/s
 vus............................: 3 min=3 max=50
 vus_max........................: 50 min=50 max=50
-
+```
 The crucial attribute to examine is http_req_duration.
 This attribute indicates total time for the request (including time to send and receive response from
 Ciphertrust Manager's AWS HYOK service).
