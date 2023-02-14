@@ -66,8 +66,8 @@ function generateHeader(dict) {
        month is may so UTC month will return 4 so we have to add 1 to get
        the current months value
      */
-    const hyok_date = year.toString() + (month < 10 ? '0' : '') + (month + 1).toString() + date.toString() + "T" + (hour < 10 ? `0${hour}` : hour.toString()) + (mins < 10 ? `0${mins}` : mins.toString()) + (sec < 10 ? `0${sec}` : sec.toString()) + "Z"
-    var hyok_date_stamp = year.toString() + (month < 10 ? '0' : '') + (month + 1).toString() + date.toString()
+    const hyok_date = year.toString() + (month < 10 ? '0' : '') + (month + 1).toString() + (date < 10 ? `0${date}` : date.toString()) + "T" + (hour < 10 ? `0${hour}` : hour.toString()) + (mins < 10 ? `0${mins}` : mins.toString()) + (sec < 10 ? `0${sec}` : sec.toString()) + "Z"
+    var hyok_date_stamp = year.toString() + (month < 10 ? '0' : '') + (month + 1).toString() + (date < 10 ? `0${date}` : date.toString())
     var headers_to_sign = {'host': dict["kylo"], 'x-amz-date': hyok_date}
 
     var crypto_url = dict["xks_proxy_uri"] + "/keys/" + dict["hyok_key_id"] + "/encrypt"
