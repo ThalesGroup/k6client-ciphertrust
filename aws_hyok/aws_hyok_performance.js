@@ -7,7 +7,7 @@ export let errorRate = new Rate('errors');
 
 // To disable the certificate verification
 export const options = {
-    insecureSkipTLSVerify: true,
+    insecureSkipTLSVerify: JSON.parse(__ENV.SKIP_TLS_VERIFICATION.toLowerCase()),
 }
 
 /*
@@ -88,9 +88,9 @@ function generateHeader(dict) {
     var canonical_request = `POST\n${crypto_url}\n${canonical_query_string}\n${canonical_headers}\n${signed_header}\n${payload_hash}`
     var canonical_request_hash = sign(null, canonical_request, true, true)
 
-    var credential_scope = `${hyok_date_stamp}/us-east-1/${xks_service}/${request_type}`
+    var credential_scope = `${hyok_date_stamp}/${__ENV.AWS_REGION}/${xks_service}/${request_type}`
     var string_to_sign = `${algorithm}\n${hyok_date}\n${credential_scope}\n${canonical_request_hash}`
-    var signing_key = getSigningKey(dict["cks_access_secret_key"], hyok_date_stamp, "us-east-1", xks_service)
+    var signing_key = getSigningKey(dict["cks_access_secret_key"], hyok_date_stamp, __ENV.AWS_REGION, xks_service)
 
     var signature = sign(signing_key, string_to_sign, true)
 
@@ -105,9 +105,9 @@ function generateHeader(dict) {
 }
 
 export default function () {
-    var aws_acc_id = "123456789012"
+    var aws_acc_id = __ENV.AWS_ACCOUNT_ID
     var aws_user = "Alice"
-    var aws_region = "us-east-1"
+    var aws_region = __ENV.AWS_REGION
     var aws_key_id = "1234abcd-12ab-34cd-56ef-1234567890ab"
     var aad_data = "cHJvamVjdD1uaWxlLGRlcGFydG1lbnQ9bWFya2V0aW5n"
     var plain_text = "SGVsbG8gV29ybGQh"

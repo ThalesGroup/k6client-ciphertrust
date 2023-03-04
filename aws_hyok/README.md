@@ -9,8 +9,7 @@ Recommendation
 For best performance, it is recommended to have following:
 
 * Ciphertrust Manager configuration of >= 4CPU, 16GB memory.
-* Ciphertrust Manager instance  along with Luna HSM hosted in same 
-  region/zone as the client machine where k6 is run.
+* Ciphertrust Manager instance hosted in same region/zone as the client machine where k6 is run.
 * For getting closest results to your environment, deploy client in same 
   region as your CM and Luna.
 
