@@ -28,6 +28,10 @@ Steps to run k6 client to measure AWS HYOK encrypt performance:
    * HYOK_KEY_ID=HYOK key Id
    * CKS_ACCESS_ID=Custom KeyStore Access Id
    * CKS_SECRET_KEY=KeyStore Access Secret
+   * AWS_REGION: AWS region where keystore is created
+   * AWS_ACCOUNT_ID: AWS Account Id
+   * SKIP_TLS_VERIFICATION: TLS Verification flag to verify the certificates. In case of local instanaces which does not have proper certificates installed, 
+                            please use true to skip the verification
 2. Run command `source aws_env` to export the environment variables
 3. k6 run --stage 5s:70,30s:70,5s:0 aws_hyok_performance.js
 
