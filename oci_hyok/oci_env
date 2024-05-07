@@ -1,0 +1,6 @@
+export CM_URL=<CipherTrust Manager IP e.g 10.171.31.203>
+export IDP_ID=<OCI IDP Id e.g. db3a8f31-309b-4d49-a154-200bef744367>
+export VAULT_ID=<OCI External VAULT Id e.g. db3a8f31-309b-4d49-a154-200bef744367>
+export HYOK_KEY_ID=<OCI HYOK key Id e.g. bd8c8533-b1f8-4f77-935b-b9affc59397d>
+export IDP_ACCESS_ID=<OCI Issuer Access Id e.g. V564MSGUTT2YZVRI2OYR>
+export IDP_SECRET_KEY=<OCI Issuer Access Secret e.g. c147dc75ddc4f9d0e83477f2421713949d5c55584b425d0f7641fe99890aab5d>
